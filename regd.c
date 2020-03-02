@@ -56,7 +56,7 @@ static struct country_code_to_enum_rd allCountries[] = {
  */
 #define RTL819x_2GHZ_CH12_13	\
 	REG_RULE(2467-10, 2472+10, 40, 0, 20,\
-	NL80211_RRF_PASSIVE_SCAN)
+	0)
 
 #define RTL819x_2GHZ_CH14	\
 	REG_RULE(2484-10, 2484+10, 40, 0, 20, \
@@ -272,6 +272,7 @@ static void _rtl_reg_apply_radar_flags(struct wiphy *wiphy)
 		if (!_rtl_is_radar_freq(ch->center_freq))
 			continue;
 
+#if 0
 		/*
 		 *We always enable radar detection/DFS on this
 		 *frequency range. Additionally we also apply on
@@ -287,6 +288,7 @@ static void _rtl_reg_apply_radar_flags(struct wiphy *wiphy)
 			ch->flags |= IEEE80211_CHAN_RADAR |
 			    IEEE80211_CHAN_NO_IBSS |
 			    IEEE80211_CHAN_PASSIVE_SCAN;
+#endif
 	}
 }
 
@@ -294,8 +296,8 @@ static void _rtl_reg_apply_world_flags(struct wiphy *wiphy,
 				       enum nl80211_reg_initiator initiator,
 				       struct rtl_regulatory *reg)
 {
-	_rtl_reg_apply_beaconing_flags(wiphy, initiator);
-	_rtl_reg_apply_active_scan_flags(wiphy, initiator);
+	//_rtl_reg_apply_beaconing_flags(wiphy, initiator);
+	//_rtl_reg_apply_active_scan_flags(wiphy, initiator);
 	return;
 }
 
